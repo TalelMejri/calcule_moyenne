@@ -1,5 +1,4 @@
-<template>
-    
+<template> 
     <div class="foot">
         <div class="row bg-dark py-5">
             <div class="col-lg-12 text-center">
@@ -28,9 +27,6 @@
             <p class="text-center lead"> {{date}}</p>
         </div>
     </div>
-         
-       
-
 </template>
 
 <script>
