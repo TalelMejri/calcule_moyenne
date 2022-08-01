@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid ">
-     <nav class="navbar navbar-expand-lg shadow ">
+     <nav class="navbar navbar-expand-lg shadow">
         <a class="navbar-brand mx-5 position-absolute" href="#">Logo ici</a>
         <button
           class="navbar-toggler"
@@ -24,8 +24,6 @@
           </ul>
         </div>
     </nav>
-
-      
   </div>
 </template>
 
