@@ -1,6 +1,5 @@
 <template>
   <div class="home py-5">
-
         <HelloWorld></HelloWorld>
   </div>
 </template>
