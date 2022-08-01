@@ -8,12 +8,13 @@
                 </span>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto text-center">
-                        <li class="nav-item mx-0 mx-lg-5"><a class="nav-link py-3 px-0 px-lg-3 "><router-link to="/">Home</router-link></a></li>
-                        <li class="nav-item mx-0 mx-lg-5"><a class="nav-link py-3 px-0 px-lg-3 "><router-link to="/about">About Us</router-link></a></li>
+                        <li class="nav-item mx-0 mx-lg-5"><a class="nav-link py-3 px-0 px-lg-3 "><router-link to="/"><i class="bi bi-house"></i> Home</router-link></a></li>
+                        <li class="nav-item mx-0 mx-lg-5"><a class="nav-link py-3 px-0 px-lg-3 "><router-link to="/about"><i class="bi bi-calculator"></i> Claculer Moyenne</router-link></a></li>
                     </ul>
                 </div>
             </div>
         </nav>
+
 </template>
 
 <script>
@@ -51,8 +52,14 @@ li{
 
 ul li a{
     text-decoration: none;
-    font-size: 20px;
-    color: black;
+    font-size:25px;
+     color: #ad5623;
+    font-weight:600;
+}
+
+a:hover{
+ transform: scale(1.5);
+
 }
 
 nav {
@@ -62,7 +69,7 @@ nav {
   font-weight: 700;
 }
 .sticky{
- background-color:gray;
+ background-color:#f5e8d8;
  padding: 10px 70px;
  height: 60px;
 

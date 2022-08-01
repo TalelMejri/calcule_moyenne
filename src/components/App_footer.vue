@@ -1,6 +1,6 @@
 <template>
     
-    <div class="foot py-4 mt-5">
+    <div class="foot">
         <div class="row bg-dark py-5">
             <div class="col-md-6">
                 <div class="row mx-5">
@@ -24,7 +24,7 @@
 
         </div>
          <div class="row bg-secondary ">
-            <p class="text-center text-white mt-3">Copyright 2022-2023 &copy;</p>
+            <p class="text-center text-white mt-3">Copyright 2022-2023 &copy; {{date}}</p>
         </div>
        
     </div>
@@ -34,6 +34,11 @@
 
 <script>
 export default {
-    name:'App_footer'
+    name:'App_footer',
+    data(){
+        return{
+            date:new Date(),
+        }
+    }
 }
 </script>

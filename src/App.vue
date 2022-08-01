@@ -15,8 +15,8 @@ import App_footer from "./components/App_footer.vue";
        App_Header,App_footer
     }
  }
+    
 </script>
-<style>
- 
+<style scoped>
 
 </style>
