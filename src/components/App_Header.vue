@@ -14,7 +14,6 @@
                 </div>
             </div>
         </nav>
-
 </template>
 
 <script>
@@ -28,6 +27,9 @@ export default {
   methods:{
     show(){
          return this.click=this.click ? 0 :1;
+    },
+    navbar(){
+       
     }
   },
   computed:{
@@ -35,6 +37,10 @@ export default {
   }
 
 };
+            window.addEventListener('scroll',function(){
+                const header=document.querySelector('nav');
+                header.classList.toggle('sticky',window.scrollY>0);
+            });
 </script>
 
 <style scoped>
@@ -46,6 +52,7 @@ li{
 ul li a{
     text-decoration: none;
     font-size: 20px;
+    color: black;
 }
 
 nav {
@@ -54,4 +61,11 @@ nav {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
 }
+.sticky{
+ background-color:gray;
+ padding: 10px 70px;
+ height: 60px;
+
+}
+
 </style>
