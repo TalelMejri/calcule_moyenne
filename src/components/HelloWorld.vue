@@ -1,8 +1,6 @@
 <template>
-<div class="hello">
- 
-</div>
-       <!--   <div class="container px-4 px-lg-5 mt-5">
+<div class="hello py-5 mt-5">
+          <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5  row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <div class="col mb-5">
                         <div class="card h-100">
@@ -174,7 +172,7 @@
                    </div>
                    </div>
             </div>
-            -->   
+  
 </template>
 
 <script>
