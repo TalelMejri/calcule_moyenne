@@ -24,7 +24,8 @@
 
         </div>
          <div class="row bg-secondary ">
-            <p class="text-center text-white mt-3">Copyright 2022-2023 &copy; {{date}}</p>
+            <p class="text-center text-white mt-3">Copyright 2022-2023 &copy; </p>
+            <p class="text-center lead"> {{date}}</p>
         </div>
        
     </div>
