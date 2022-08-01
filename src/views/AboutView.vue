@@ -38,15 +38,33 @@
         <div class="card mt-5">
            <div class="face face1">
                     <div class="content">
-                           <ol type="7" start="7" >
+
+                             <div class="modale mt-4 py-4" v-if="opacity==1 || clean==0">
+                                <ol type="1" class="mt-5 py-2">
+                                <li ><a href="">info</a> </li>
+                                <li><a href="">technique</a></li>
+                                <li><a href="">math</a></li>
+                                <li><a href="">science</a></li>
+                                <li><a href="">eco</a></li>
+                                <li><a href="">lettre</a></li>
+                                <li><a href="">sport</a></li>
+                           </ol>
+                            </div>
+
+                           <ol v-else type="7" start="7" >
                                 <li ><a href="">Premiere</a> </li>
-                                <li><a href="">8</a></li>
-                                <li><a href="">neuvième </a></li>
+                                <li><a href="#"  @click="show">2éme </a></li>
+                                <li><a href="#" @click="clean">3eme </a></li>
+                                <li><a href="">Bac </a></li>
                            </ol>
                     </div>
                 </div>
             <div class="face face2">
-                <h2>Secondaire</h2>
+                <h2 v-if="opacity==0 && clair==0"> Secondaire</h2>
+                <h2 v-else> 2éme</h2>
+
+                 <h2 v-if="opacity==1 || clean==0"> </h2>
+                <h2 v-else> 3éme</h2>
             </div>
         </div>
     </div>
@@ -56,8 +74,23 @@
 <script>
 
  export default {
-    name:"AboutView"
+    name:"AboutView",
+    data(){
+        return{
+            opacity:0,
+            clair:0,
+        }
+    },
+    methods: {
+        show(){
+            return this.opacity=1;
+        },
+        clean(){
+            return this.clair=1;
+        }
+    },
  }
+ 
 
 </script>
 
