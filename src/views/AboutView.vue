@@ -36,13 +36,11 @@
             </div>
 
         <div class="card mt-5">
-        
            <div class="face face1">
-
                  <i v-if="opacity || clair || bac" @click="initial" id="close" class="bi bi-x-lg"></i>
                     <div class="content">
-                             <div class="modale mt-4 py-4" v-if="opacity==1 || clair==1 || bac==1">
-                                <ol type="1" class="mt-5 py-2">
+                        <div class="modale mt-4 py-4" v-if="opacity==1 || clair==1 || bac==1">
+                            <ol type="1" class="mt-5 py-2">
                                 <li ><a href="">info</a> </li>
                                 <li><a href="">technique</a></li>
                                 <li><a href="">math</a></li>
@@ -51,8 +49,7 @@
                                 <li><a href="">lettre</a></li>
                                 <li><a href="">sport</a></li>
                            </ol>
-                            </div>
-
+                        </div>
                            <ol v-else type="7" start="7" >
                                 <li ><a href="">Premiere</a> </li>
                                 <li><a href="#"  @click="show">2éme </a></li>
@@ -68,7 +65,7 @@
                 <h2 v-else-if="bac==1">Bac</h2>
             </div>
         </div>
-           
+
     </div>
     </div>
   </div>
