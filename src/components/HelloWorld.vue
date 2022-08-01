@@ -1,6 +1,6 @@
 <template>
 <div class="hello">
-
+    <button class="btn btn-outline-info fadein" >talel</button>
 </div>
 </template>
 
