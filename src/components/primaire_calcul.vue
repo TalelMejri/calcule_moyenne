@@ -1,33 +1,6 @@
 <template>
   <div class="cont">
-    <div class="container py-5">
-      <div class="row py-5">
-        <div class="card mt-5">
-          <div class="face face1">
-            <div class="content">
-              <ol type="1" class="mt-5 py-2">
-                <li
-                  @click="update(index)"
-                  v-for="(prim, index) in primaire"
-                  :key="prim.id"
-                >
-                  <a
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
-                    href="#"
-                    >{{ primaire[index] }}</a
-                  >
-                </li>
-              </ol>
-            </div>
-          </div>
-          <div class="face face2">
-            <h2>{{ titel }}</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <niveau-card :niveaux="primaire" :titel="titel" @selectNiveau="selectNiveau"/>
     <div
       class="modal fade"
       id="exampleModal"
@@ -52,40 +25,6 @@
             <form class="shadow rounded pt-5">
               <div class="row pt-5">
 
-              <div class="matier1 card col-lg-3 pt-5">
-                  <input type="number" name="mat1"   required class="form-control mb-3">
-                  <input type="number" name="mat1"   required class="form-control mb-3">
-                  <input type="number" name="mat1"   required class="form-control mb-3">
-                  <input type="number" name="mat1"   required class="form-control mb-3">
-                  <input type="number"  v-model="mat1" readonly required class="form-control mb-3" placeholder="resultat">
-                 <span @click="update1()" class="btn btn-primary">suivant</span>
-              </div>
-
-               <div v-if="matiere1" class="matier2 card col-lg-3 py-5">
-                  <input type="number"  name="mat2" required class="form-control mb-3">
-                  <input type="number" name="mat2" required class="form-control mb-3">
-                  <input type="number" name="mat2" required class="form-control mb-3">
-                  <input type="number" name="mat2" required class="form-control mb-3">
-                  <input type="number" v-model="mat2" readonly required class="form-control mb-3">
-                 <span  @click="update2()" id="first" class="btn btn-primary">suivant</span>
-              </div>
-
-               <div v-if="matiere2" class="matier3 card col-lg-3 py-5">
-                  <input type="number"  name="mat3"  required class="form-control mb-3">
-                  <input type="number" name="mat3"   required class="form-control mb-3">
-                  <input type="number" name="mat3"   required class="form-control mb-3">
-                  <input type="number" name="mat3"   required class="form-control mb-3">
-                  <input type="number" v-model="mat3" readonly  required class="form-control mb-3">
-                 <span  @click="update3()" class="btn btn-success">Resultat</span>
-              </div>
-
-              <div v-if="resultat" class="resultat card col-lg-3">
-                 <canvas id="my-canvas"></canvas> 
-                  this is resulatat {{(this.mat1+this.mat2+this.mat3)/3}}
-                 <button   
-                 data-bs-dismiss="modal"
-                 class="btn btn-primary">Confirme</button>
-              </div>
              </div>
             </form>
           </div>
@@ -105,11 +44,11 @@
 </template>
 
 <script type="module">  
-
-import javascript_file from '../assets/index.min.js';
-
+    import HorizontalStepper from 'vue-stepper';
+import niveauCard from '@/components/Card.vue';
 export default {
   name: "primaire_calcul",
+  components:{niveauCard,HorizontalStepper},
   data() {
     return {
       select: 0,
@@ -126,7 +65,7 @@ export default {
     titel: String,
   },
   methods: {
-    update(index) {
+    selectNiveau(index) {
       this.select = index;
     },
     update1(){
@@ -182,87 +121,5 @@ export default {
 </script>
 
 <style scoped>
-.container .card {
-  position: relative;
-  width: 300px;
-  height: 400px;
-  margin: 0 auto;
-  background: #fff;
-  transition: 0.5s;
-}
-#my-canvas{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    visibility: hidden;
-}
-#my-canvas.active{
-    visibility: visible;
-}
-.container .card:hover {
-  box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2);
-}
-.container .card .face {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.container .card .face.face1 {
-  box-sizing: border-box;
-  padding: 20px;
-  text-align: center;
-  background: #fff;
-  color: #013d4a;
-}
-.container .card .face.face1 h2 {
-  margin-top: 70px;
-}
-.container .card .face.face2 {
-  background: url(../assets/Capture.PNG);
-  transition: 0.5s;
-}
-.container .card:hover .face.face2 {
-  height: 80px;
-  width: 80px;
-  cursor: pointer;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: transparent;
-}
-
-.container .card .face.face2 h2 {
-  margin: 0;
-  padding: 0;
-  font-size: 25px;
-  font-weight: 600;
-  color: #000;
-  transition: 0.5s;
-}
-
-.container .card:hover .face.face2 h2 {
-  color: #013d4a;
-  font-size: 2em;
-}
-
-li {
-  text-align: center;
-  line-height: 40px;
-}
-a {
-  text-decoration: none;
-  font-size: 25px;
-}
-
-a:hover {
-  color: red;
-  border-bottom: 1px solid #000;
-}
+@import url("@/assets/css/style.css");
 </style>
