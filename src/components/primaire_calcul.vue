@@ -49,14 +49,14 @@
             ></button>
           </div>
           <div class="modal-body container">
-            <form class="shadow rounded pt-5" onsubmit.prevent="OnSubmit">
+            <form class="shadow rounded pt-5">
               <div class="row pt-5">
 
               <div class="matier1 card col-lg-3 pt-5">
-                  <input type="number" name="mat1"    required class="form-control mb-3">
-                  <input type="number" name="mat1"    required class="form-control mb-3">
-                  <input type="number" name="mat1"    required class="form-control mb-3">
-                  <input type="number" name="mat1"    required class="form-control mb-3">
+                  <input type="number" name="mat1"   required class="form-control mb-3">
+                  <input type="number" name="mat1"   required class="form-control mb-3">
+                  <input type="number" name="mat1"   required class="form-control mb-3">
+                  <input type="number" name="mat1"   required class="form-control mb-3">
                   <input type="number"  v-model="mat1" readonly required class="form-control mb-3" placeholder="resultat">
                  <span @click="update1()" class="btn btn-primary">suivant</span>
               </div>
@@ -66,25 +66,25 @@
                   <input type="number" name="mat2" required class="form-control mb-3">
                   <input type="number" name="mat2" required class="form-control mb-3">
                   <input type="number" name="mat2" required class="form-control mb-3">
-                  <input type="number" v-model="mat2"  required class="form-control mb-3">
-                 <span  @click="update2()" class="btn btn-primary">suivant</span>
+                  <input type="number" v-model="mat2" readonly required class="form-control mb-3">
+                 <span  @click="update2()" id="first" class="btn btn-primary">suivant</span>
               </div>
 
                <div v-if="matiere2" class="matier3 card col-lg-3 py-5">
-                  <input type="number"  name="mat3" required class="form-control mb-3">
-                  <input type="number" name="mat3" required class="form-control mb-3">
-                  <input type="number" name="mat3" required class="form-control mb-3">
-                  <input type="number" name="mat3" required class="form-control mb-3">
-                  <input type="number" v-model="mat3"  required class="form-control mb-3">
+                  <input type="number"  name="mat3"  required class="form-control mb-3">
+                  <input type="number" name="mat3"   required class="form-control mb-3">
+                  <input type="number" name="mat3"   required class="form-control mb-3">
+                  <input type="number" name="mat3"   required class="form-control mb-3">
+                  <input type="number" v-model="mat3" readonly  required class="form-control mb-3">
                  <span  @click="update3()" class="btn btn-success">Resultat</span>
               </div>
 
               <div v-if="resultat" class="resultat card col-lg-3">
                  <canvas id="my-canvas"></canvas> 
                   this is resulatat {{(this.mat1+this.mat2+this.mat3)/3}}
-                 <button @click="matiere1=0,matiere2=0,resultat=0"  
+                 <button   
                  data-bs-dismiss="modal"
-                 type="submit" class="btn btn-primary">Confirme</button>
+                 class="btn btn-primary">Confirme</button>
               </div>
              </div>
             </form>
@@ -104,7 +104,10 @@
   </div>
 </template>
 
-<script>  
+<script type="module">  
+
+import javascript_file from '../assets/index.min.js';
+
 export default {
   name: "primaire_calcul",
   data() {
@@ -154,7 +157,11 @@ export default {
          this.resultat=1;
       },
       congrast(){
-        
+        let clik=document.querySelector('#first');
+        let canva=document.querySelector('#my-canvas');
+        clik.addEventListener('click',function(){
+            canva.classList.add('active');
+        });
         var confettiSettings = { target: 'my-canvas' };
         var confetti = new ConfettiGenerator(confettiSettings);
         confetti.render();
@@ -182,6 +189,17 @@ export default {
   margin: 0 auto;
   background: #fff;
   transition: 0.5s;
+}
+#my-canvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+}
+#my-canvas.active{
+    visibility: visible;
 }
 .container .card:hover {
   box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2);
