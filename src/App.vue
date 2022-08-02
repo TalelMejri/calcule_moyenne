@@ -12,6 +12,7 @@
 <script>
 import App_Header from "./components/App_Header.vue";
 import App_footer from "./components/App_footer.vue";
+
  export default {
     name:'app',
     components:{

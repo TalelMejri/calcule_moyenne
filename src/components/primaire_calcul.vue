@@ -6,17 +6,12 @@
                 <div class="face face1">
                     <div class="content">
                            <ol type="1" class="mt-5 py-2">
-                                <li><a href="">Premire</a></li>
-                                <li><a href="">deuxieme</a></li>
-                                <li><a href="">troisime</a></li>
-                                <li><a href="">qutrieme</a></li>
-                                <li><a href="">cinquieme</a></li>
-                                <li><a href="">sixieme</a></li>
+                                <li v-for="prim in primaire" :key="prim.id"><a href="">{{prim}}</a></li>
                            </ol>
                     </div>
                 </div>
                 <div class="face face2">
-                    <h2>Primaire</h2>
+                    <h2>{{titel}}</h2>
                 </div>
             </div>
       </div>
@@ -27,7 +22,11 @@
 <script>
 
  export default {
-    name:'primaire_calcul'
+    name:'primaire_calcul',
+    props:{
+        primaire:Array,
+        titel:String
+    }
  }
 
 </script>
