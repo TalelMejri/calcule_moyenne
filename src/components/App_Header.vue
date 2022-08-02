@@ -36,10 +36,11 @@ export default {
   }
 
 };
-            window.addEventListener('scroll',function(){
-                const header=document.querySelector('nav');
-                header.classList.toggle('sticky',window.scrollY>0);
-            });
+  /*** scrool *///
+                window.addEventListener('scroll',function(){
+                       const header=document.querySelector('nav');
+                       header.classList.toggle('sticky',window.scrollY>0);
+                 });
 </script>
 
 <style scoped>
