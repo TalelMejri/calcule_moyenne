@@ -53,34 +53,35 @@
               <div class="row pt-5">
 
               <div class="matier1 card col-lg-3 pt-5">
-                  <input type="text" required class="form-control mb-3">
-                  <input type="text" required class="form-control mb-3">
-                  <input type="text" required class="form-control mb-3">
-                  <input type="text" required class="form-control mb-3">
-                  <input type="text" required class="form-control mb-3">
-                 <span @click="matiere1=1" class="btn btn-primary">suivant</span>
+                  <input type="number" name="mat1"    required class="form-control mb-3">
+                  <input type="number" name="mat1"    required class="form-control mb-3">
+                  <input type="number" name="mat1"    required class="form-control mb-3">
+                  <input type="number" name="mat1"    required class="form-control mb-3">
+                  <input type="number"  v-model="mat1" readonly required class="form-control mb-3" placeholder="resultat">
+                 <span @click="update1()" class="btn btn-primary">suivant</span>
               </div>
 
                <div v-if="matiere1" class="matier2 card col-lg-3 py-5">
-                 <input type="text" required class="form-control mb-3">
-                  <input type="text" required class="form-control mb-3">
-                  <input type="text" required class="form-control mb-3">
-                  <input type="text" required class="form-control mb-3">
-                  <input type="text" required class="form-control mb-3">
-                 <span  @click="matiere2=1" class="btn btn-primary">suivant</span>
+                  <input type="number"  name="mat2" required class="form-control mb-3">
+                  <input type="number" name="mat2" required class="form-control mb-3">
+                  <input type="number" name="mat2" required class="form-control mb-3">
+                  <input type="number" name="mat2" required class="form-control mb-3">
+                  <input type="number" v-model="mat2"  required class="form-control mb-3">
+                 <span  @click="update2()" class="btn btn-primary">suivant</span>
               </div>
 
                <div v-if="matiere2" class="matier3 card col-lg-3 py-5">
-                  <input type="text" required class="form-control mb-3">
-                  <input type="text" required class="form-control mb-3">
-                  <input type="text" required class="form-control mb-3">
-                  <input type="text" required class="form-control mb-3">
-                  <input type="text" required class="form-control mb-3">
-                 <button  @click="resultat=1" class="btn btn-primary">suivant</button>
+                  <input type="number"  name="mat3" required class="form-control mb-3">
+                  <input type="number" name="mat3" required class="form-control mb-3">
+                  <input type="number" name="mat3" required class="form-control mb-3">
+                  <input type="number" name="mat3" required class="form-control mb-3">
+                  <input type="number" v-model="mat3"  required class="form-control mb-3">
+                 <span  @click="update3()" class="btn btn-success">Resultat</span>
               </div>
 
               <div v-if="resultat" class="resultat card col-lg-3">
-                  this is resulatat
+                 <canvas id="my-canvas"></canvas> 
+                  this is resulatat {{(this.mat1+this.mat2+this.mat3)/3}}
                  <button @click="matiere1=0,matiere2=0,resultat=0"  
                  data-bs-dismiss="modal"
                  type="submit" class="btn btn-primary">Confirme</button>
@@ -104,6 +105,7 @@
 </template>
 
 <script>
+
 export default {
   name: "primaire_calcul",
   data() {
@@ -112,7 +114,9 @@ export default {
       matiere1:0,
       matiere2:0,
       matiere3:0,
-      resultat:0
+      resultat:0,
+      mat1:0,
+      mat2:0
     };
   },
   props: {
@@ -123,9 +127,52 @@ export default {
     update(index) {
       this.select = index;
     },
+    update1(){
+        let m=document.getElementsByName('mat1');
+        let count=0;
+        m.forEach(v=>{
+            count+=parseInt(v.value);
+        });
+         this.mat1=count/4;
+         this.matiere1=1;
+      },
+    update2(){
+        let m=document.getElementsByName('mat2');
+        let count=0;
+        m.forEach(v=>{
+            count+=parseInt(v.value);
+        });
+         this.mat2=count/4;
+         this.matiere2=1;
+      },
+       update3(){
+        let m=document.getElementsByName('mat3');
+        let count=0;
+        m.forEach(v=>{
+            count+=parseInt(v.value);
+        });
+         this.mat3=count/4;
+         this.resultat=1;
+      },
+      congrast(){
+        
+        var confettiSettings = { target: 'my-canvas' };
+        var confetti = new ConfettiGenerator(confettiSettings);
+        confetti.render();
+      }
   },
-  computed: {},
+  computed: {
+    
+  },
+
+  watch:{
+
+       
+  }
 };
+
+
+
 </script>
 
 <style scoped>
