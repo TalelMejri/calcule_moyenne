@@ -1,5 +1,6 @@
 <template>
-         <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav">
+           
+         <nav  class="navbar navbar-expand-lg text-uppercase fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="#page-top">Logo ici</a>
                 <span class="navbar-toggler display-4 text-dark" @click="show()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,9 +29,6 @@ export default {
   methods:{
     show(){
          return this.click=this.click ? 0 :1;
-    },
-    navbar(){
-       
     }
   },
   computed:{
@@ -72,6 +70,12 @@ nav {
  background-color:#f5e8d8;
  padding: 10px 70px;
  height: 60px;
+}
+
+@media screen and (max-width:991px){
+  nav{
+    background-color: gray;
+  }
 
 }
 

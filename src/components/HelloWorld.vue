@@ -11,16 +11,16 @@
                         <li><span>Website</span></li>
                     </ul>
             </div>
-                <div class="row py-5 gap-3">
-                       <div class="col-lg-5 py-4">
+                <div class="row">
+                       <div class="col-lg-4 py-4">
                             <img src="../assets/Motivation4.jpg" alt="" class="shadow rounded-pill" width="300px" height="300px">
                        </div>
-                       <div class="col-md-3 py-5 ">
-                           <p style="font-size:22px" class="mt-5 py-5 fw-bolder">
+                       <div class="col-md-4 py-5 text-center">
+                           <p style="font-size:22px" class="py-5 mt-5 fw-bolder">
                                  " Success is the most beautiful thing in the world. "
                            </p>
                        </div>
-                        <div class="col-lg-2 py-4">
+                        <div class="col-lg-4 text-center py-4">
                             <img src="../assets/Best-success-quotes-pics-status-thought-12.jpg" class="shadow rounded-pill" alt="" width="200px" height="300px">
                        </div>
                 </div>

@@ -6,7 +6,7 @@
                 <div class="face face1">
                     <div class="content">
                            <ol type="1" class="mt-5 py-2">
-                                <li ><a href="">Premire</a> </li>
+                                <li ><a href="">Premire</a></li>
                                 <li><a href="">deuxieme</a></li>
                                 <li><a href="">troisime</a></li>
                                 <li><a href="">qutrieme</a></li>
@@ -182,6 +182,10 @@ a{
     font-size: 25px;
 }
 
+a:hover{
+    color:red;
+    border-bottom: 1px solid #000;
+}
 
 
 
