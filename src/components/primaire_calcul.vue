@@ -1,6 +1,6 @@
 <template>
   <div class="cont">
-    <niveau-card :niveaux="primaire" :titel="titel" @selectNiveau="selectNiveau"/>
+    <niveau-card :niveaux="primaire" :titel="titel" :niveau="niveau" @selectNiveau="selectNiveau"/>
     <div
       class="modal fade"
       id="exampleModal"
@@ -12,7 +12,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="d-flex justify-content-center">
-              {{ primaire[this.select] }}
+              {{ niveau[this.select] }}
             </h5>
             <button
               type="button"
@@ -53,6 +53,7 @@ export default {
   props: {
     primaire: Array,
     titel: String,
+    niveau: Array
   },
   methods: {
     selectNiveau(index) {

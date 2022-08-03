@@ -3,7 +3,7 @@
 .container .card{
     position: relative;
     width: 300px;
-    height: 400px;
+    height: 430px;
     margin: 0 auto;
     background: #fff;
     transition: 0.5s;
@@ -59,17 +59,18 @@
     font-size: 2em;
 }
 
-li{
+.content li{
 
     text-align: center;
     line-height: 40px;
 }
-a{
+.content a{
     text-decoration: none;
-    font-size: 25px;
+    font-size: 20px;
+    margin-top:80px;
 }
 
-a:hover{
+.content a:hover{
     color:red;
     border-bottom: 1px solid #000;
 }
