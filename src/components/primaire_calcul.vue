@@ -35,12 +35,27 @@
                   >
                     <div class="row gap-2">
                       <input
+                        id="form"
                         type="number"
                         class="col-md-4 form-control text-center w-50"
                         @keyup="calculate(form[mat].module)"
                         :readonly="mat.indexOf('معدل') !== -1"
                         v-model="form[mat].note"
                       />
+                      <!--  <div v-if="hasError('form')" class="invalid-feedback">
+                        <div
+                          class="text-danger"
+                          v-if="!$v.form[mat].note.required"
+                        >
+                          الرجاء إدخال عدد.
+                        </div>
+                        <div
+                          class="text-danger"
+                          v-if="!$v.form[mat].note.between"
+                        >
+                          الرجاء إدخال عدد صحيح بين 0 و 20.
+                        </div>
+                      </div>-->
                       <label class="col-md-5 text-center">: {{ mat }}</label>
                     </div>
                   </div>
@@ -106,8 +121,8 @@
 
 <script>
 import { FormWizard, TabContent, ValidationHelper } from "vue-step-wizard";
+//import { required, between } from "vuelidate/lib/validators";
 import niveauCard from "@/components/Card.vue";
-
 import Vue from "vue";
 import VueConfetti from "vue-confetti";
 
@@ -115,7 +130,7 @@ Vue.use(VueConfetti);
 
 export default {
   name: "primaire_calcul",
-  components: { niveauCard, FormWizard, TabContent },
+  components: { niveauCard, FormWizard, TabContent, ValidationHelper },
   mixins: [ValidationHelper],
   data() {
     return {
@@ -123,6 +138,13 @@ export default {
       form: {},
       moyenne: 0,
       field: 0,
+      /*validationRules: {
+      form: {
+          required,
+          numeric,
+          between: between(0, 20),
+        },
+      },*/
     };
   },
   watch: {
@@ -175,7 +197,7 @@ export default {
     },
     Onsubmit() {
       this.field = 1;
-      this.$confetti.start();
+      this.$confetti.Onsubmit();
     },
     initial() {
       this.field = 0;
