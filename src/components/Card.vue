@@ -3,18 +3,18 @@
       <div class="row py-5">
         <div class="card mt-5">
           <div class="face face1">
-            <div class="content">
-              <ol type="1" class="mt-5 py-2">
-                <li
+            <div class="content py-5">
+              <ol type="1" class="mt-5 py-5">
+                <li class="mt-2"
                   @click="$emit('selectNiveau',index)"
-                  v-for="(prim, index) in niveaux"
+                  v-for="(prim,index) in niveau"
                   :key="prim.id"
                 >
                   <a
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                     href="#"
-                    >{{ niveaux[index] }}</a
+                    >{{ niveau[index]}}</a
                   >
                 </li>
               </ol>
@@ -33,6 +33,7 @@ export default {
     props:{
       niveaux: Array,
       titel: String,
+      niveau:Array
     }
 }
 </script>
