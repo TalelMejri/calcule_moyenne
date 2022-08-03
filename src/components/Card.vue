@@ -14,7 +14,7 @@
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                     href="#"
-                    >{{ niveau[index]}}</a
+                    >{{ prim.name}}</a
                   >
                 </li>
               </ol>
@@ -31,9 +31,8 @@
 <script>
 export default {
     props:{
-      niveaux: Array,
       titel: String,
-      niveau:Array
+      niveau:Object
     }
 }
 </script>
