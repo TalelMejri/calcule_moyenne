@@ -106,7 +106,7 @@ export default {
       });
       this.form[key].note = (sum - lastNote) / (count - 1);
       count=0;
-      sum=0
+      sum=0;
       Object.values(this.form).forEach((val) => {
         if (val.name.indexOf('معدل') !== -1){
             count++;
