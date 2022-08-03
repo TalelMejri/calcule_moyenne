@@ -43,12 +43,12 @@
   </div>
 </template>
 
-<script type="module">  
-    import HorizontalStepper from 'vue-stepper';
+<script>  
+
 import niveauCard from '@/components/Card.vue';
 export default {
   name: "primaire_calcul",
-  components:{niveauCard,HorizontalStepper},
+  components:{niveauCard},
   data() {
     return {
       select: 0,
@@ -95,25 +95,11 @@ export default {
          this.mat3=count/4;
          this.resultat=1;
       },
-      congrast(){
-        let clik=document.querySelector('#first');
-        let canva=document.querySelector('#my-canvas');
-        clik.addEventListener('click',function(){
-            canva.classList.add('active');
-        });
-        var confettiSettings = { target: 'my-canvas' };
-        var confetti = new ConfettiGenerator(confettiSettings);
-        confetti.render();
-      }
+     
   },
   computed: {
     
   },
-
-  watch:{
-
-       
-  }
 };
 
 
