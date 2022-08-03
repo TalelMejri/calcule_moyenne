@@ -22,20 +22,71 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body container">
-            {{ moyenne }}
-            <div v-for="mod in niveau[select].modules" :key="mod.id">
-              <h1>{{ mod.name }}</h1>
-              <span v-for="mat in mod.matiere" :key="mat.id"
-                >{{ mat }}
-                <input
-                  type="number"
-                  @keyup="calculate(form[mat].module)"
-                  :readonly="mat.indexOf('معدل') !== -1"
-                  v-model="form[mat].note" />
-                <br
-              /></span>
-              <br />
+          <div style="margin-top: -50px" class="modal-body container">
+            <form-wizard @onComplete="Onsubmit">
+              {{ moyenne }}
+              <div v-for="mod in niveau[select].modules" :key="mod.id">
+                <tab-content>
+                  <h1 class="text-center fw-bolder mb-3">{{ mod.name }}</h1>
+                  <div
+                    class="form-control"
+                    v-for="mat in mod.matiere"
+                    :key="mat.id"
+                  >
+                    <div class="row gap-2">
+                      <input
+                        type="number"
+                        class="col-md-4 form-control text-center w-50"
+                        @keyup="calculate(form[mat].module)"
+                        :readonly="mat.indexOf('معدل') !== -1"
+                        v-model="form[mat].note"
+                      />
+                      <label class="col-md-5 text-center">: {{ mat }}</label>
+                    </div>
+                  </div>
+                </tab-content>
+              </div>
+            </form-wizard>
+          </div>
+          <div
+            v-if="this.field"
+            class="modal modal-sheet d-block"
+            tabindex="-1"
+            role="dialog"
+            id="modalSheet"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content position-static rounded-6 shadow">
+                <div class="modal-header border-bottom-0 py-6">
+                  <h5 class="modal-title float-end">النتيجة</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body text-center">
+                  <p>
+                    معدل الثلاثي هو
+                    <span :class="moyenne > 10 ? 'text-sucess' : 'text-danger'"
+                      >{{ moyenne }}
+                    </span>
+                  </p>
+                </div>
+                <div class="modal-footer flex-column border-top-0">
+                  <button
+                    type="button"
+                    @click="initial()"
+                    data-bs-dismiss="modal"
+                    class="btn btn-lg btn-primary w-100 mx-0 mb-2"
+                  >
+                    <span :class="moyenne > 10 ? 'text-sucess' : 'text-danger'">
+                      {{ moyenne > 10 ? "حسنا" : "للاسف" }}
+                    </span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -54,15 +105,24 @@
 </template>
 
 <script>
+import { FormWizard, TabContent, ValidationHelper } from "vue-step-wizard";
 import niveauCard from "@/components/Card.vue";
+
+import Vue from "vue";
+import VueConfetti from "vue-confetti";
+
+Vue.use(VueConfetti);
+
 export default {
   name: "primaire_calcul",
-  components: { niveauCard },
+  components: { niveauCard, FormWizard, TabContent },
+  mixins: [ValidationHelper],
   data() {
     return {
       select: 0,
       form: {},
       moyenne: 0,
+      field: 0,
     };
   },
   watch: {
@@ -82,7 +142,6 @@ export default {
     },
   },
   props: {
-    // primaire: Array,
     titel: String,
     niveau: Object,
   },
@@ -114,10 +173,20 @@ export default {
       });
       this.moyenne = sum / count;
     },
+    Onsubmit() {
+      this.field = 1;
+      this.$confetti.start();
+    },
+    initial() {
+      this.field = 0;
+    },
   },
   computed: {},
 };
 </script>
 
 <style scoped>
+label {
+  font-weight: 600;
+}
 </style>
