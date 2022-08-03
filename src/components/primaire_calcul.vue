@@ -23,7 +23,7 @@
             ></button>
           </div>
           <div class="modal-body container">
-          {{moyenne}}
+            {{ moyenne }}
             <div v-for="mod in niveau[select].modules" :key="mod.id">
               <h1>{{ mod.name }}</h1>
               <span v-for="mat in mod.matiere" :key="mat.id"
@@ -33,7 +33,6 @@
                   @keyup="calculate(form[mat].module)"
                   :readonly="mat.indexOf('معدل') !== -1"
                   v-model="form[mat].note" />
-
                 <br
               /></span>
               <br />
@@ -105,15 +104,15 @@ export default {
         }
       });
       this.form[key].note = (sum - lastNote) / (count - 1);
-      count=0;
-      sum=0;
+      count = 0;
+      sum = 0;
       Object.values(this.form).forEach((val) => {
-        if (val.name.indexOf('معدل') !== -1){
-            count++;
-            sum+=val.note;
+        if (val.name.indexOf("معدل") !== -1) {
+          count++;
+          sum += val.note;
         }
       });
-      this.moyenne=sum/count;
+      this.moyenne = sum / count;
     },
   },
   computed: {},
