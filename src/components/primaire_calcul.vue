@@ -24,7 +24,6 @@
           </div>
           <div style="margin-top: -50px" class="modal-body container">
             <form-wizard @onComplete="Onsubmit">
-              {{ moyenne }}
               <div v-for="mod in niveau[select].modules" :key="mod.id">
                 <tab-content>
                   <h1 class="text-center fw-bolder mb-3">{{ mod.name }}</h1>

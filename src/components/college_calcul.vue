@@ -23,9 +23,10 @@
             ></button>
           </div>
           <div style="margin-top: -50px" class="modal-body container">
-            <form-wizard @onComplete="Onsubmit">
+            <form-wizard>
               <div v-for="mod in niveau[select].modules" :key="mod.id">
                 <tab-content>
+                  {{ moyenne }}
                   <h1 class="text-center fw-bolder mb-3">
                     {{ mod.name }}
                   </h1>
@@ -39,6 +40,7 @@
                         id="form"
                         type="number"
                         :readonly="mat.indexOf('معدل') !== -1"
+                        @keyup="calculate(form[mat].module)"
                         class="col-md-4 form-control text-center w-50"
                         v-model="form[mat].note"
                       />
@@ -73,7 +75,12 @@
 </template>
 
 <script>
-import { FormWizard, TabContent, ValidationHelper } from "vue-step-wizard";
+import {
+  FormWizard,
+  TabContent,
+  ValidationHelper,
+  validationMixin,
+} from "vue-step-wizard";
 import card from "@/components/Card.vue";
 export default {
   name: "college_calcul",
@@ -90,11 +97,37 @@ export default {
     return {
       select: 0,
       form: {},
+      moyenne: 0,
     };
   },
   methods: {
     selectNiveau(index) {
       this.select = index;
+    },
+    calculate(module) {
+      let sum = 0;
+      let count = 0;
+      let lastnote = 0;
+      let key = "";
+      Object.values(this.form).forEach((v) => {
+        if (v.module == module) {
+          sum += parseInt(v.note) || 0;
+          //lastnote = pareInt(v.note) || 0;
+          key = v.name;
+          count++;
+        }
+      });
+      this.form[key].note = sum / (count - 1);
+      count = 0;
+      sum = 0;
+      Object.values(this.form).forEach((val) => {
+        if (val.name.indexOf("معدل") !== -1) {
+          count += val.coef;
+          sum = sum + val.note * val.coef;
+          console.log(val.coef);
+        }
+      });
+      this.moyenne = sum / count;
     },
   },
   watch: {
