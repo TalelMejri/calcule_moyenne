@@ -1,21 +1,28 @@
 <template>
   <div class="about py-5">
-    <primaire_calcul
-      :primaire="primaire"
-      :niveau="niveau"
-      :titel="titel"
-    ></primaire_calcul>
+    <div class="row">
+      <primaire_calcul
+        class="col-md-4"
+        :primaire="primaire"
+        :niveau="niveau"
+        :titel="titel_primaire"
+      ></primaire_calcul>
+      <college_calcul
+        class="col-md-4"
+        :niveau="niveau_college"
+        :titel="titel_college"
+      ></college_calcul>
+    </div>
   </div>
 </template>
 <script>
 import primaire_calcul from "@/components/primaire_calcul.vue";
-
+import college_calcul from "@/components/college_calcul.vue";
 export default {
-  mounted() {},
   name: "AboutView",
   data() {
     return {
-      titel: "المرحلة الابتدائية",
+      titel_primaire: "المرحلة الابتدائية",
       primaire: {
         domaine: {
           arabic: {
@@ -76,9 +83,244 @@ export default {
           },
         },
       },
+      titel_college: "المرحلة الاعدادية",
+      college: {
+        domaine: {
+          arabic: {
+            name: "مادة العربية",
+            coef: 4,
+            matiere: [
+              "فرض المراقبة عدد 1 في دراسة النص",
+              "فرض مراقبة عدد 1 في الانشاء",
+              "الشفوي في مادة العربية",
+              "الفرض التأليفي في الانشاء",
+              "الفرض التأليفي في دراسة النص",
+              "معدل العربية",
+            ],
+          },
+          francais: {
+            name: "مادة الفرنسية",
+            coef: 4,
+            matiere: [
+              "فرض المراقبة عدد 1",
+              "فرض المراقبة عدد 2",
+              "الفرض التأليفي",
+              "الشفوي في مادة الفرنسية",
+              "معدل الفرنسية",
+            ],
+          },
+          anglais: {
+            name: "مادة الانجليزية",
+            coef: 1.5,
+            matiere: [
+              "فرض المراقبة عدد 1",
+              "فرض المراقبة عدد 2",
+              "الفرض التأليفي",
+              "الشفوي",
+              "معدل الانجليزية",
+            ],
+          },
+          math: {
+            name: "مادة الرياضيات",
+            coef: 3,
+            matiere: [
+              "فرض المراقبة عدد 1",
+              "فرض المراقبة عدد 2",
+              "الفرض التأليفي",
+              "معدل الرياضيات",
+            ],
+          },
+          physqiue: {
+            name: "مادة العلوم الفيزيائية",
+            coef: 1,
+            matiere: [
+              "فرض المراقبة عدد 1",
+              "الفرض التأليفي",
+              "معدل العلوم الفيزيائية",
+            ],
+          },
+          science: {
+            name: "مادة العلوم الطبيعية",
+            coef: 1,
+            matiere: [
+              "فرض المراقبة عدد 1",
+              "الفرض التأليفي",
+              "الشفوي / الأشغال التطبيقية",
+              "معدل العلوم الطبيعية",
+            ],
+          },
+          history: {
+            name: "مادة التاريخ",
+            coef: 1,
+            matiere: [
+              "فرض المراقبة عدد 1",
+              "الفرض التأليفي",
+              "الشفوي",
+              "معدل التاريخ",
+            ],
+          },
+          geo: {
+            name: "مادة الجغرافيا",
+            coef: 1,
+            matiere: [
+              "فرض المراقبة عدد 1",
+              "الفرض التأليفي",
+              "الشفوي",
+              "معدل الجغرافيا",
+            ],
+          },
+          technique: {
+            name: "مادة التربية التكنولوجية",
+            coef: 1,
+            matiere: [
+              "فرض المراقبة عدد 1",
+              "الفرض التأليفي",
+              "الشفوي",
+              "معدل التكنولوجية",
+            ],
+          },
+          islamic: {
+            name: "مادة التربية الاسلامية",
+            coef: 1,
+            matiere: [
+              "فرض المراقبة عدد 1",
+              "الفرض التأليفي",
+              "الشفوي",
+              " معدل التربية الاسلامية",
+            ],
+          },
+          civil: {
+            name: "مادة التربية المدنية",
+            coef: 1,
+            matiere: [
+              "فرض المراقبة عدد 1",
+              "الفرض التأليفي",
+              "الشفوي",
+              " معدل التربية المدنية",
+            ],
+          },
+          info: {
+            name: "مادة الإعلامية",
+            coef: 1,
+            matiere: [
+              "فرض المراقبة عدد 1",
+              "الفرض التأليفي",
+              " معدل الإعلامية",
+            ],
+          },
+          theatre: {
+            name: "مادة المسرح",
+            coef: 1,
+            matiere: [
+              "فرض المراقبة عدد 1",
+              "الفرض التأليفي",
+              "الشفوي",
+              " معدل  المسرح",
+            ],
+          },
+          sport: {
+            name: " مادة التربية البدنية",
+            coef: 1,
+            matiere: [
+              "فرض المراقبة",
+              "الفرض التأليفي",
+              " معدل التربية البدنية",
+            ],
+          },
+          dessin: {
+            name: " مادة التربية التشكيلية  ",
+            coef: 1,
+            matiere: [
+              "فرض المراقبة",
+              "الفرض التأليفي",
+              " معدل التربية التشكيلية",
+            ],
+          },
+          music: {
+            name: "مادة التربية الموسيقية ",
+            coef: 1,
+            matiere: [
+              "فرض المراقبة ",
+              "الفرض التأليفي",
+              "الشفوي",
+              " معدل التربية الموسيقية",
+            ],
+          },
+        },
+      },
     };
   },
   computed: {
+    niveau_college() {
+      return {
+        "السنة السابعة أساسي": {
+          name: "السنة السابعة أساسي",
+          id: 1,
+          modules: [
+            this.college.domaine["arabic"],
+            this.college.domaine["francais"],
+            this.college.domaine["anglais"],
+            this.college.domaine["math"],
+            this.college.domaine["physqiue"],
+            this.college.domaine["science"],
+            this.college.domaine["history"],
+            this.college.domaine["geo"],
+            this.college.domaine["technique"],
+            this.college.domaine["islamic"],
+            this.college.domaine["civil"],
+            this.college.domaine["info"],
+            this.college.domaine["theatre"],
+            this.college.domaine["sport"],
+            this.college.domaine["dessin"],
+            this.college.domaine["music"],
+          ],
+        },
+        "السنة الثامنة أساسي  ": {
+          name: "  السنة الثامنة أساسي",
+          id: 2,
+          modules: [
+            this.college.domaine["arabic"],
+            this.college.domaine["francais"],
+            this.college.domaine["anglais"],
+            this.college.domaine["math"],
+            this.college.domaine["physqiue"],
+            this.college.domaine["science"],
+            this.college.domaine["history"],
+            this.college.domaine["geo"],
+            this.college.domaine["technique"],
+            this.college.domaine["islamic"],
+            this.college.domaine["civil"],
+            this.college.domaine["info"],
+            this.college.domaine["theatre"],
+            this.college.domaine["sport"],
+            this.college.domaine["dessin"],
+            this.college.domaine["music"],
+          ],
+        },
+        "  السنة التاسعة أساسي": {
+          name: "  السنة التاسعة أساسي",
+          id: 3,
+          modules: [
+            this.college.domaine["arabic"],
+            this.college.domaine["francais"],
+            this.college.domaine["anglais"],
+            this.college.domaine["math"],
+            this.college.domaine["physqiue"],
+            this.college.domaine["science"],
+            this.college.domaine["history"],
+            this.college.domaine["geo"],
+            this.college.domaine["technique"],
+            this.college.domaine["islamic"],
+            this.college.domaine["civil"],
+            this.college.domaine["info"],
+            this.college.domaine["theatre"],
+            this.college.domaine["sport"],
+            this.college.domaine["dessin"],
+            this.college.domaine["music"],
+          ],
+        },
+      };
+    },
     niveau() {
       return {
         "السنة الاولى ابتدائي": {
@@ -144,6 +386,7 @@ export default {
   },
   components: {
     primaire_calcul,
+    college_calcul,
   },
 };
 </script>
