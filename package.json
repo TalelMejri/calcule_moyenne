@@ -16,7 +16,8 @@
     "vue-confetti": "^2.3.0",
     "vue-router": "^3.5.1",
     "vue-simple-spinner": "^1.2.10",
-    "vue-step-wizard": "^0.1.17"
+    "vue-step-wizard": "^0.1.17",
+    "vuejs-stepper": "^0.2.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
