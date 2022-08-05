@@ -126,6 +126,7 @@ export default {
     },
     initiale() {
       this.congrats = 0;
+      this.$confetti.stop();
     },
   },
   computed: {},
