@@ -136,9 +136,9 @@ export default {
       for (let mod in this.niveau[this.select].modules) {
         for (let mat in this.niveau[this.select].modules[mod].matiere) {
           let m = new Object({
-            name: this.niveau[this.select].modules[mod].matiere[mat],
+            name: this.niveau[this.select].modules[mod].matiere[mat].name,
+            coef: this.niveau[this.select].modules[mod].matiere[mat].coef,
             note: 0,
-            coef: this.niveau[this.select].modules[mod].coef,
             module: mod,
           });
           form[m.name] = m;

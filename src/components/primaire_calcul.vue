@@ -1,117 +1,46 @@
 <template>
   <div class="cont">
     <niveau-card :titel="titel" :niveau="niveau" @selectNiveau="selectNiveau" />
-    <div
-      v-if="select"
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="d-flex justify-content-center">
-              {{ niveau[select].name }}
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+    <div class="show" v-if="select">
+      <h2 class="text-center mb-2">{{ this.niveau[select].name }}</h2>
+      <div class="row">
+        <div
+          v-for="mod in this.niveau[select].modules"
+          :key="mod.id"
+          class="card col-sm-12 text-center mb-3"
+        >
+          <div class="card-header text-warning fw-bolder">{{ mod.name }}</div>
+          <div v-for="mat in mod.matiere" :key="mat.id" class="card-body">
+            <p class="card-text row">
+              <input
+                class="col-lg-6 text-center"
+                type="text"
+                v-model="form[mat].note"
+                :readonly="mat.indexOf('معدل') !== -1"
+                @keyup="calculate(form[mat].module)"
+              />
+              <label class="col-lg-6 text-center">: {{ mat }}</label>
+            </p>
           </div>
-          <div style="margin-top: -50px" class="modal-body container">
-            <form-wizard @onComplete="Onsubmit">
-              <div v-for="mod in niveau[select].modules" :key="mod.id">
-                <tab-content>
-                  <h1 class="text-center fw-bolder mb-3">{{ mod.name }}</h1>
-                  <div
-                    class="form-control"
-                    v-for="mat in mod.matiere"
-                    :key="mat.id"
-                  >
-                    <div class="row gap-2">
-                      <input
-                        id="form"
-                        type="number"
-                        class="col-md-4 form-control text-center w-50"
-                        @keyup="calculate(form[mat].module)"
-                        :readonly="mat.indexOf('معدل') !== -1"
-                        v-model="form[mat].note"
-                      />
-                      <!--  <div v-if="hasError('form')" class="invalid-feedback">
-                        <div
-                          class="text-danger"
-                          v-if="!$v.form[mat].note.required"
-                        >
-                          الرجاء إدخال عدد.
-                        </div>
-                        <div
-                          class="text-danger"
-                          v-if="!$v.form[mat].note.between"
-                        >
-                          الرجاء إدخال عدد صحيح بين 0 و 20.
-                        </div>
-                      </div>-->
-                      <label class="col-md-5 text-center">: {{ mat }}</label>
-                    </div>
-                  </div>
-                </tab-content>
-              </div>
-            </form-wizard>
-          </div>
-          <div
-            v-if="this.field"
-            class="modal modal-sheet d-block"
-            tabindex="-1"
-            role="dialog"
-            id="modalSheet"
-          >
-            <div class="modal-dialog" role="document">
-              <div class="modal-content position-static rounded-6 shadow">
-                <div class="modal-header border-bottom-0 py-6">
-                  <h5 class="modal-title float-end">النتيجة</h5>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div class="modal-body text-center">
-                  <p>
-                    معدل الثلاثي هو
-                    <span :class="moyenne > 10 ? 'text-sucess' : 'text-danger'"
-                      >{{ moyenne }}
-                    </span>
-                  </p>
-                </div>
-                <div class="modal-footer flex-column border-top-0">
-                  <button
-                    type="button"
-                    @click="initial()"
-                    data-bs-dismiss="modal"
-                    class="btn btn-lg btn-primary w-100 mx-0 mb-2"
-                  >
-                    <span :class="moyenne > 10 ? 'text-sucess' : 'text-danger'">
-                      {{ moyenne > 10 ? "حسنا" : "للاسف" }}
-                    </span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-          </div>
+        </div>
+        <button @click="Onsubmit" class="btn btn-warning">النتيجة</button>
+      </div>
+    </div>
+    <div v-if="congrats == 1">
+      <div class="card felicitation" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title fw-bolder">النتيجة</h5>
+          <h6 class="card-subtitle mb-2 text-muted text-center">
+            : معدل الثلاثي
+          </h6>
+          <p class="card-text text-center fw-bolder">
+            {{ this.moyenne }}
+          </p>
+          <button v-on:click="initiale" class="btn btn-warning">
+            <span :class="this.moyenne > 10 ? 'text-success' : 'text-danger'">
+              {{ this.moyenne > 10 ? "احسنت" : " للاسف" }}
+            </span>
+          </button>
         </div>
       </div>
     </div>
@@ -135,15 +64,9 @@ export default {
     return {
       select: 0,
       form: {},
+      congrats: 0,
       moyenne: 0,
-      field: 0,
-      /*validationRules: {
-      form: {
-          required,
-          numeric,
-          between: between(0, 20),
-        },
-      },*/
+      field: 1,
     };
   },
   watch: {
@@ -195,11 +118,14 @@ export default {
       this.moyenne = sum / count;
     },
     Onsubmit() {
-      this.field = 1;
-      this.$confetti.Onsubmit();
+      this.select = 0;
+      this.congrats = 1;
+      if (this.moyenne > 10) {
+        this.$confetti.start();
+      }
     },
-    initial() {
-      this.field = 0;
+    initiale() {
+      this.congrats = 0;
     },
   },
   computed: {},
@@ -209,5 +135,30 @@ export default {
 <style scoped>
 label {
   font-weight: 600;
+}
+.show {
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  width: 50%;
+  z-index: 1;
+  background: #fff;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1),
+    0 0 0 1000px rgba(255, 255, 255, 0.95);
+  padding: 40px;
+}
+input {
+  border: none;
+  border-bottom: 1px solid #000;
+  outline: none;
+}
+.felicitation {
+  top: 50%;
+  position: fixed;
+  left: 50%;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1),
+    0 0 0 1000px rgba(255, 255, 255, 0.95);
+  transform: translate(-50%, -50%);
 }
 </style>

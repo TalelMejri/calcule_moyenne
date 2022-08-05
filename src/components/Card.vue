@@ -11,12 +11,7 @@
                 v-for="(prim, index) in niveau"
                 :key="prim.id"
               >
-                <a
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                  href="#"
-                  >{{ prim.name }}</a
-                >
+                <a href="#">{{ prim.name }}</a>
               </li>
             </ol>
           </div>
