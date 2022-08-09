@@ -10,15 +10,17 @@
           :key="mod.id"
           class="card col-sm-12 text-center mb-3"
         >
-          <div class="card-header text-warning fw-bolder">{{ mod.name }}</div>
-          <div v-for="mat in mod.matiere.name" :key="mat.id" class="card-body">
+          <div class="card-header text-warning fw-bolder">
+            {{ mod.name }}
+          </div>
+          <div v-for="mat in mod.matiere" :key="mat.id" class="card-body">
             <p class="card-text row">
               <input
                 class="col-lg-6 text-center"
+                :readonly="mat.name.indexOf('معدل') !== -1"
+                @keyup="calculate(form[mat.name].module)"
+                v-model="form[mat.name].note"
                 type="text"
-                v-model="form[mat].note"
-                :readonly="mat.indexOf('معدل') !== -1"
-                @keyup="calculate(form[mat].module)"
               />
               <label class="col-lg-6 text-center">: {{ mat.name }}</label>
             </p>
@@ -63,17 +65,19 @@ export default {
     calculate(module) {
       let sum = 0;
       let count = 0;
+      let coef = 1;
       let lastnote = 0;
       let key = "";
+
       Object.values(this.form).forEach((v) => {
         if (v.module == module) {
-          sum += parseInt(v.note) || 0;
-          //lastnote = pareInt(v.note) || 0;
+          sum = sum + parseInt(v.note * v.coef);
+          lastnote = parseInt(v.note * v.coef);
           key = v.name;
           count++;
         }
       });
-      this.form[key].note = sum / (count - 1);
+      this.form[key].note = (sum - lastnote) / count;
       count = 0;
       sum = 0;
       Object.values(this.form).forEach((val) => {
