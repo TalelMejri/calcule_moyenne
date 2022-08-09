@@ -65,13 +65,12 @@ export default {
     calculate(module) {
       let sum = 0;
       let count = 0;
-      let coef = 1;
       let lastnote = 0;
       let key = "";
 
       Object.values(this.form).forEach((v) => {
         if (v.module == module) {
-          sum = sum + parseInt(v.note * v.coef);
+          sum += parseInt(v.note * v.coef);
           lastnote = parseInt(v.note * v.coef);
           key = v.name;
           count++;
@@ -84,7 +83,6 @@ export default {
         if (val.name.indexOf("معدل") !== -1) {
           count += val.coef;
           sum = sum + val.note * val.coef;
-          console.log(val.coef);
         }
       });
       this.moyenne = sum / count;
@@ -100,6 +98,7 @@ export default {
             coef: this.niveau[this.select].modules[mod].matiere[mat].coef,
             note: 0,
             module: mod,
+            coef_domaine: mod.coef,
           });
           form[m.name] = m;
         }
