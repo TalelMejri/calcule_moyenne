@@ -259,11 +259,11 @@ export default {
           modules: [
             this.college.domaine["arabic"],
             this.college.domaine["francais"],
-            this.college.domaine["anglais"],
+            /*this.college.domaine["anglais"],
             this.college.domaine["math"],
             this.college.domaine["physqiue"],
             this.college.domaine["science"],
-            /*this.college.domaine["history"],
+            this.college.domaine["history"],
             this.college.domaine["geo"],
             this.college.domaine["technique"],
             this.college.domaine["islamic"],
