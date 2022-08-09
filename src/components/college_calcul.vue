@@ -1,74 +1,32 @@
 <template>
   <div class="college">
     <card :titel="titel" :niveau="niveau" @selectNiveau="selectNiveau"></card>
-    <div
-      v-if="select"
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="d-flex justify-content-center">
-              {{ niveau[select].name }}
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div style="margin-top: -50px" class="modal-body container">
-            <form-wizard>
-              <div v-for="mod in niveau[select].modules" :key="mod.id">
-                <tab-content>
-                  {{ moyenne }}
-                  <h1 class="text-center fw-bolder mb-3">
-                    {{ mod.name }}
-                  </h1>
-                  <div
-                    v-for="mat in mod.matiere"
-                    :key="mat.id"
-                    class="form-control"
-                  >
-                    <div class="row gap-2">
-                      <input
-                        id="form"
-                        type="number"
-                        :readonly="mat.indexOf('معدل') !== -1"
-                        @keyup="calculate(form[mat].module)"
-                        class="col-md-4 form-control text-center w-50"
-                        v-model="form[mat].note"
-                      />
 
-                      <label class="col-md-5 text-center">{{ mat }}</label>
-                    </div>
-                  </div>
-                </tab-content>
-              </div>
-            </form-wizard>
+    <div class="show" v-if="select">
+      <h2 class="text-center mb-2">{{ this.niveau[select].name }}</h2>
+      <div class="row">
+        <div
+          v-for="mod in this.niveau[select].modules"
+          :key="mod.id"
+          class="card col-sm-12 text-center mb-3"
+        >
+          <div class="card-header text-warning fw-bolder">
+            {{ mod.name }}
           </div>
-          <div
-            v-if="this.field"
-            class="modal modal-sheet d-block"
-            tabindex="-1"
-            role="dialog"
-            id="modalSheet"
-          ></div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
+          <div v-for="mat in mod.matiere" :key="mat.id" class="card-body">
+            <p class="card-text row">
+              <input
+                class="col-lg-6 text-center"
+                :readonly="mat.name.indexOf('معدل') !== -1"
+                @keyup="calculate(form[mat.name].module)"
+                v-model="form[mat.name].note"
+                type="text"
+              />
+              <label class="col-lg-6 text-center">: {{ mat.name }}</label>
+            </p>
           </div>
         </div>
+        <button @click="Onsubmit" class="btn btn-warning">النتيجة</button>
       </div>
     </div>
   </div>
@@ -107,17 +65,19 @@ export default {
     calculate(module) {
       let sum = 0;
       let count = 0;
+      let coef = 1;
       let lastnote = 0;
       let key = "";
+
       Object.values(this.form).forEach((v) => {
         if (v.module == module) {
-          sum += parseInt(v.note) || 0;
-          //lastnote = pareInt(v.note) || 0;
+          sum = sum + parseInt(v.note * v.coef);
+          lastnote = parseInt(v.note * v.coef);
           key = v.name;
           count++;
         }
       });
-      this.form[key].note = sum / (count - 1);
+      this.form[key].note = (sum - lastnote) / count;
       count = 0;
       sum = 0;
       Object.values(this.form).forEach((val) => {

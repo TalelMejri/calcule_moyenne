@@ -91,22 +91,22 @@ export default {
             coef: 4,
             matiere: [
               { name: "فرض المراقبة عدد 1 في دراسة النص", coef: 1 },
-              "فرض مراقبة عدد 1 في الانشاء",
-              "الشفوي في مادة العربية",
-              "الفرض التأليفي في الانشاء",
-              "الفرض التأليفي في دراسة النص",
-              "معدل العربية",
+              { name: "فرض مراقبة عدد 1 في الانشاء", coef: 1 },
+              { name: "الشفوي في مادة العربية", coef: 1 },
+              { name: "الفرض التأليفي في الانشاء", coef: 1 },
+              { name: "الفرض التأليفي في دراسة النص", coef: 1 },
+              { name: "معدل العربية", coef: 0 },
             ],
           },
           francais: {
             name: "مادة الفرنسية",
             coef: 4,
             matiere: [
-              "فرض المراقبة عدد 1 في الفرنسية ",
-              "فرض المراقبة عدد 2 في الفرنسية ",
-              " الفرض التأليفي في الفرنسية ",
-              "الشفوي في مادة الفرنسية",
-              "معدل الفرنسية",
+              { name: "فرض المراقبة عدد 1 في الفرنسية ", coef: 1 },
+              { name: "فرض المراقبة عدد 2 في الفرنسية ", coef: 1 },
+              { name: " الفرض التأليفي في الفرنسية ", coef: 1 },
+              { name: "الشفوي في مادة الفرنسية", coef: 1 },
+              { name: "معدل الفرنسية", coef: 0 },
             ],
           },
           anglais: {
@@ -259,7 +259,7 @@ export default {
           modules: [
             this.college.domaine["arabic"],
             this.college.domaine["francais"],
-            this.college.domaine["anglais"],
+            /*this.college.domaine["anglais"],
             this.college.domaine["math"],
             this.college.domaine["physqiue"],
             this.college.domaine["science"],
@@ -272,7 +272,7 @@ export default {
             this.college.domaine["theatre"],
             this.college.domaine["sport"],
             this.college.domaine["dessin"],
-            this.college.domaine["music"],
+            this.college.domaine["music"],*/
           ],
         },
         "السنة الثامنة أساسي  ": {
@@ -281,7 +281,7 @@ export default {
           modules: [
             this.college.domaine["arabic"],
             this.college.domaine["francais"],
-            this.college.domaine["anglais"],
+            /* this.college.domaine["anglais"],
             this.college.domaine["math"],
             this.college.domaine["physqiue"],
             this.college.domaine["science"],
@@ -294,7 +294,7 @@ export default {
             this.college.domaine["theatre"],
             this.college.domaine["sport"],
             this.college.domaine["dessin"],
-            this.college.domaine["music"],
+            this.college.domaine["music"],*/
           ],
         },
         "  السنة التاسعة أساسي": {
@@ -303,7 +303,7 @@ export default {
           modules: [
             this.college.domaine["arabic"],
             this.college.domaine["francais"],
-            this.college.domaine["anglais"],
+            /* this.college.domaine["anglais"],
             this.college.domaine["math"],
             this.college.domaine["physqiue"],
             this.college.domaine["science"],
@@ -316,7 +316,7 @@ export default {
             this.college.domaine["theatre"],
             this.college.domaine["sport"],
             this.college.domaine["dessin"],
-            this.college.domaine["music"],
+            this.college.domaine["music"],*/
           ],
         },
       };
