@@ -12,13 +12,14 @@
         >
           <div class="card-header text-warning fw-bolder">
             {{ mod.name }}
+            {{ moyenne }}
           </div>
           <div v-for="mat in mod.matiere" :key="mat.id" class="card-body">
             <p class="card-text row">
               <input
                 class="col-lg-6 text-center"
                 :readonly="mat.name.indexOf('معدل') !== -1"
-                @keyup="calculate(form[mat.name].module)"
+                @keyup="calculate(form[mat].module)"
                 v-model="form[mat.name].note"
                 type="text"
               />
@@ -33,12 +34,6 @@
 </template>
 
 <script>
-import {
-  FormWizard,
-  TabContent,
-  ValidationHelper,
-  validationMixin,
-} from "vue-step-wizard";
 import card from "@/components/Card.vue";
 export default {
   name: "college_calcul",
@@ -48,8 +43,6 @@ export default {
   },
   components: {
     card,
-    FormWizard,
-    TabContent,
   },
   data() {
     return {
@@ -62,32 +55,34 @@ export default {
     selectNiveau(index) {
       this.select = index;
     },
+
     calculate(module) {
       let sum = 0;
       let count = 0;
-      let coef = 1;
       let lastnote = 0;
       let key = "";
 
       Object.values(this.form).forEach((v) => {
         if (v.module == module) {
-          sum = sum + parseInt(v.note * v.coef);
+          sum += parseInt(v.note * v.coef);
           lastnote = parseInt(v.note * v.coef);
+          count += v.coef;
           key = v.name;
-          count++;
         }
       });
-      this.form[key].note = (sum - lastnote) / count;
+      this.form[key].note = 5; // (sum - lastnote) / (count - 1);
+
       count = 0;
       sum = 0;
-      Object.values(this.form).forEach((val) => {
+      /*Object.values(this.form).forEach((val) => {
         if (val.name.indexOf("معدل") !== -1) {
-          count += val.coef;
-          sum = sum + val.note * val.coef;
-          console.log(val.coef);
+          alert(count);
+          sum = sum + val.note * val.coef_domaine;
+          alert(val.coef_domaine);
         }
       });
-      this.moyenne = sum / count;
+
+      this.moyenne = sum / count;*/
     },
   },
   watch: {
