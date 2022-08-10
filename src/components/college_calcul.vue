@@ -12,14 +12,13 @@
         >
           <div class="card-header text-warning fw-bolder">
             {{ mod.name }}
-            {{ moyenne }}
           </div>
           <div v-for="mat in mod.matiere" :key="mat.id" class="card-body">
             <p class="card-text row">
               <input
                 class="col-lg-6 text-center"
                 :readonly="mat.name.indexOf('معدل') !== -1"
-                @keyup="calculate(form[mat].module)"
+                @keyup="calculate(form[mat.name].module)"
                 v-model="form[mat.name].note"
                 type="text"
               />
@@ -66,23 +65,19 @@ export default {
         if (v.module == module) {
           sum += parseInt(v.note * v.coef);
           lastnote = parseInt(v.note * v.coef);
-          count += v.coef;
           key = v.name;
+          count += v.coef;
         }
       });
-      this.form[key].note = 5; // (sum - lastnote) / (count - 1);
-
+      this.form[key].note = (sum - lastnote) / count;
       count = 0;
       sum = 0;
-      /*Object.values(this.form).forEach((val) => {
+      Object.values(this.form).forEach((val) => {
         if (val.name.indexOf("معدل") !== -1) {
-          alert(count);
-          sum = sum + val.note * val.coef_domaine;
-          alert(val.coef_domaine);
+          sum = sum + val.note;
         }
       });
-
-      this.moyenne = sum / count;*/
+      this.moyenne = sum / count;
     },
   },
   watch: {
@@ -95,6 +90,7 @@ export default {
             coef: this.niveau[this.select].modules[mod].matiere[mat].coef,
             note: 0,
             module: mod,
+            coef_domaine: mod.coef,
           });
           form[m.name] = m;
         }
