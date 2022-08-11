@@ -3,12 +3,16 @@
     <div class="row">
       <primaire_calcul
         class="col-md-4"
+        :show_card="show_card"
+        @selection="show_card = !show_card"
         :primaire="primaire"
         :niveau="niveau"
         :titel="titel_primaire"
       ></primaire_calcul>
       <college_calcul
         class="col-md-4"
+        :show_card="show_card"
+        @selection="show_card = !show_card"
         :niveau="niveau_college"
         :titel="titel_college"
       ></college_calcul>
@@ -22,6 +26,7 @@ export default {
   name: "AboutView",
   data() {
     return {
+      show_card: true,
       titel_primaire: "المرحلة الابتدائية",
       primaire: {
         domaine: {
@@ -104,20 +109,20 @@ export default {
             matiere: [
               { name: "فرض المراقبة عدد 1 في الفرنسية ", coef: 1 },
               { name: "فرض المراقبة عدد 2 في الفرنسية ", coef: 1 },
-              { name: " الفرض التأليفي في الفرنسية ", coef: 1 },
-              { name: "الشفوي في مادة الفرنسية", coef: 1 },
-              { name: "معدل الفرنسية", coef: 0 },
+              { name: " الفرض التأليفي في الفرنسية ", coef: 2 },
+              { name: "الشفوي في مادة الفرنسية", coef: 2 },
+              { name: "معدل الفرنسية" },
             ],
           },
           anglais: {
             name: "مادة الانجليزية",
             coef: 1.5,
             matiere: [
-              "فرض المراقبة عدد 1 مادة الانجليزية",
-              "فرض المراقبة عدد 2 مادة الانجليزية",
-              " الفرض التأليفي مادة الانجليزية",
-              "الشفوي مادة الانجليزية",
-              "معدل الانجليزية",
+              { name: "فرض المراقبة عدد 1 مادة الانجليزية", coef: 1 },
+              { name: "فرض المراقبة عدد 2 مادة الانجليزية", coef: 1 },
+              { name: " الفرض التأليفي مادة الانجليزية", coef: 2 },
+              { name: "الشفوي مادة الانجليزية", coef: 1 },
+              { name: "معدل الانجليزية" },
             ],
           },
           math: {
@@ -257,10 +262,10 @@ export default {
           name: "السنة السابعة أساسي",
           id: 1,
           modules: [
-            this.college.domaine["arabic"],
             this.college.domaine["francais"],
-            /*this.college.domaine["anglais"],
-            this.college.domaine["math"],
+            this.college.domaine["arabic"],
+            this.college.domaine["anglais"],
+            /*this.college.domaine["math"],
             this.college.domaine["physqiue"],
             this.college.domaine["science"],
             this.college.domaine["history"],

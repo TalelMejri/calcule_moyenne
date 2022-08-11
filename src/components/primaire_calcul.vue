@@ -1,6 +1,11 @@
 <template>
   <div class="cont">
-    <niveau-card :titel="titel" :niveau="niveau" @selectNiveau="selectNiveau" />
+    <niveau-card
+      v-if="show_card"
+      :titel="titel"
+      :niveau="niveau"
+      @selectNiveau="selectNiveau"
+    />
     <div class="show" v-if="select">
       <h2 class="text-center mb-2">{{ this.niveau[select].name }}</h2>
       <div class="row">
@@ -88,10 +93,12 @@ export default {
   props: {
     titel: String,
     niveau: Object,
+    show_card: Boolean,
   },
   methods: {
     selectNiveau(index) {
       this.select = index;
+      this.$emit("selection");
     },
     calculate(module) {
       let count = 0;
@@ -126,6 +133,7 @@ export default {
     },
     initiale() {
       this.congrats = 0;
+      this.$emit("selection");
       this.$confetti.stop();
     },
   },
