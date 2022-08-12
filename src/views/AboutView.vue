@@ -88,6 +88,8 @@ export default {
           },
         },
       },
+      titre_secondaire: "المرحلة الثانوي",
+      premiere_secondaire: {},
       titel_college: "المرحلة الاعدادية",
       college: {
         domaine: {
