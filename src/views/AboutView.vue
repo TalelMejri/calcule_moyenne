@@ -16,12 +16,20 @@
         :niveau="niveau_college"
         :titel="titel_college"
       ></college_calcul>
+      <secondaire_calcul
+        class="col-md-4"
+        :show_card="show_card"
+        @selection="show_card = !show_card"
+        :niveau="secondaire"
+        :titel="titre_secondaire"
+      ></secondaire_calcul>
     </div>
   </div>
 </template>
 <script>
 import primaire_calcul from "@/components/primaire_calcul.vue";
 import college_calcul from "@/components/college_calcul.vue";
+import secondaire_calcul from "@/components/secondaire_calcul.vue";
 export default {
   name: "AboutView",
   data() {
@@ -88,8 +96,6 @@ export default {
           },
         },
       },
-      titre_secondaire: "المرحلة الثانوي",
-      premiere_secondaire: {},
       titel_college: "المرحلة الاعدادية",
       college: {
         domaine: {
@@ -255,9 +261,167 @@ export default {
           },
         },
       },
+      titre_secondaire: "المرحلة الثانوي",
+      premiere_secondaire: {
+        domaine: {
+          arabic: {
+            name: "مادة العربية",
+            coef: 3,
+            matiere: [
+              { name: " الشفوي في مادة العربية", coef: 1 },
+              { name: "فرض المراقبة عدد 1 في اللغة والبلاغة", coef: 1 },
+              { name: "فرض المراقبة عدد 1 في المقال", coef: 1 },
+              { name: "الفرض التأليفي في اللغة", coef: 2 },
+              { name: "الفرض التأليفي في المقال", coef: 2 },
+              { name: "معدل العربية" },
+            ],
+          },
+          francais: {
+            name: "مادة الفرنسية",
+            coef: 2.5,
+            matiere: [
+              { name: " الشفوي في مادة الفرنسية", coef: 1 },
+              { name: "فرض المراقبة عدد 1 في مادة الفرنسية", coef: 1 },
+              { name: "الفرض التأليفي مادة الفرنسية", coef: 2 },
+              { name: "معدل الفرنسية" },
+            ],
+          },
+          anglais: {
+            name: "مادة الانجليزية",
+            coef: 1.5,
+            matiere: [
+              { name: " الشفوي في مادة الانجليزية", coef: 1 },
+              { name: "فرض المراقبة عدد 1في مادة الانجليزية", coef: 1 },
+              { name: "الفرض التأليفي في مادة الانجليزية", coef: 2 },
+              { name: "معدل الانجليزية" },
+            ],
+          },
+          math: {
+            name: "مادة الرياضيات",
+            coef: 3,
+            matiere: [
+              { name: "فرض المراقبة عدد 1 في مادة الرياضيات", coef: 1 },
+              { name: "فرض المراقبة عدد 2 في مادة الرياضيات", coef: 1 },
+              { name: "الفرض التأليفي في مادة الرياضيات", coef: 2 },
+              { name: "معدل الرياضيات" },
+            ],
+          },
+          physique: {
+            name: "مادة  العلوم الفيزيائية",
+            coef: 2.5,
+            matiere: [
+              { name: "فرض المراقبة عدد  في العلوم الفيزيائية", coef: 1 },
+              { name: "الاشغال التطبيقية TP", coef: 1 },
+              { name: "الفرض التأليفي في العلوم الفيزيائية", coef: 2 },
+              { name: "معدل  العلوم الفيزيائية" },
+            ],
+          },
+          history: {
+            name: " مادة التاريخ",
+            coef: 1.5,
+            matiere: [
+              { name: "الشفوي في مادة التاريخ", coef: 1 },
+              { name: "فرض المراقبة عدد  في مادةالتاريخ", coef: 1 },
+              { name: "الفرض التأليفي في  مادة التاريخ", coef: 2 },
+              { name: "معدل مادة التاريخ" },
+            ],
+          },
+          geo: {
+            name: " مادة الجغرافيا",
+            coef: 1.5,
+            matiere: [
+              { name: "الشفوي في مادة الجغرافيا", coef: 1 },
+              { name: "فرض المراقبة عدد  في الجغرافيا", coef: 1 },
+              { name: "الفرض التأليفي في  مادة الجغرافيا", coef: 2 },
+              { name: "معدل مادة الجغرافيا" },
+            ],
+          },
+          islamic: {
+            name: " مادة التفكير الاسلامي",
+            coef: 1,
+            matiere: [
+              { name: "الشفوي في مادة التفكير الاسلامي", coef: 1 },
+              { name: "فرض المراقبة عدد  في التفكير الاسلامي", coef: 1 },
+              { name: "الفرض التأليفي في  مادة التفكير الاسلامي", coef: 2 },
+              { name: "معدل مادة التفكير الاسلامي" },
+            ],
+          },
+          civil: {
+            name: " مادة التربية المدنية",
+            coef: 1,
+            matiere: [
+              { name: "الشفوي في مادة التربية المدنية", coef: 1 },
+              { name: "فرض المراقبة عدد  في التربية المدنية", coef: 1 },
+              { name: "الفرض التأليفي في  مادة التربية المدنية", coef: 2 },
+              { name: "معدل مادة التربية المدنية" },
+            ],
+          },
+          science: {
+            name: " مادة علوم الحياة والارض",
+            coef: 1,
+            matiere: [
+              { name: "  الاشغال التطبيقية في علوم الحياة والارض", coef: 1 },
+              { name: "فرض المراقبة عدد  في علوم الحياة والارض", coef: 1 },
+              { name: "الفرض التأليفي في  مادة علوم الحياة والارض", coef: 2 },
+              { name: "معدل مادة علوم الحياة والارض" },
+            ],
+          },
+          technique: {
+            name: "  مادة التكنولوجيا",
+            coef: 1,
+            matiere: [
+              { name: "فرض المراقبة عدد 1 في مادة التكنولوجيا", coef: 1 },
+              { name: "انجاز مشروع", coef: 1 },
+              { name: "الفرض التأليفي في  مادة التكنولوجيا", coef: 2 },
+              { name: "معدل مادة التكنولوجيا" },
+            ],
+          },
+          sport: {
+            name: "مادةالتربية البدنية",
+            coef: 1,
+            matiere: [
+              { name: "فرض المراقبة عدد 1  التربية البدنية", coef: 1 },
+              { name: "الفرض التأليفي في  مادة التربية البدنية", coef: 2 },
+              { name: "معدل مادة التربية البدنية" },
+            ],
+          },
+          info: {
+            name: "مادة الاعلامية",
+            coef: 1,
+            matiere: [
+              { name: "فرض المراقبة عدد 1   مادة الاعلامية", coef: 1 },
+              { name: "الفرض التأليفي في  مادة  مادة الاعلامية", coef: 2 },
+              { name: "معدل مادة  مادة الاعلامية" },
+            ],
+          },
+        },
+      },
     };
   },
   computed: {
+    secondaire() {
+      return {
+        "السنة الأولى ثانوي": {
+          name: "السنة الأولى ثانوي",
+          id: 1,
+          modules: [
+            this.premiere_secondaire.domaine["arabic"],
+            this.premiere_secondaire.domaine["francais"],
+            this.premiere_secondaire.domaine["anglais"],
+            this.premiere_secondaire.domaine["math"],
+            this.premiere_secondaire.domaine["physique"],
+            this.premiere_secondaire.domaine["science"],
+            this.premiere_secondaire.domaine["history"],
+            this.premiere_secondaire.domaine["geo"],
+            this.premiere_secondaire.domaine["technique"],
+            this.premiere_secondaire.domaine["islamic"],
+            this.premiere_secondaire.domaine["civil"],
+            this.premiere_secondaire.domaine["info"],
+            this.premiere_secondaire.domaine["sport"],
+          ],
+        },
+      };
+    },
     niveau_college() {
       return {
         "السنة السابعة أساسي": {
@@ -394,6 +558,7 @@ export default {
   components: {
     primaire_calcul,
     college_calcul,
+    secondaire_calcul,
   },
 };
 </script>
