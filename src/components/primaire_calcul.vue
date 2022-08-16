@@ -121,7 +121,7 @@ export default {
           sum += val.note;
         }
       });
-      this.moyenne = (sum / count).tofixed(2);
+      this.moyenne = (sum / count).toFixed(2);
     },
     Onsubmit() {
       this.select = 0;
