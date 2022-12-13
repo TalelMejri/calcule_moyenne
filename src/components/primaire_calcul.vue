@@ -1,13 +1,19 @@
 <template>
-  <div class="cont">
-    <niveau-card :titel="titel" :niveau="niveau" @selectNiveau="selectNiveau" />
-    <div class="show" v-if="select">
+  <div class="primaire">
+    <niveau-card
+      v-if="show_card"
+      :titel="titel"
+      :niveau="niveau"
+      @selectNiveau="selectNiveau"
+    ></niveau-card>
+
+    <div class="show mt-5" v-if="select">
       <h2 class="text-center mb-2">{{ this.niveau[select].name }}</h2>
       <div class="row">
         <div
           v-for="mod in this.niveau[select].modules"
           :key="mod.id"
-          class="card col-sm-12 text-center mb-3"
+          class="card col-lg-12 text-center mb-3"
         >
           <div class="card-header text-warning fw-bolder">{{ mod.name }}</div>
           <div v-for="mat in mod.matiere" :key="mat.id" class="card-body">
@@ -48,8 +54,6 @@
 </template>
 
 <script>
-import { FormWizard, TabContent, ValidationHelper } from "vue-step-wizard";
-//import { required, between } from "vuelidate/lib/validators";
 import niveauCard from "@/components/Card.vue";
 import Vue from "vue";
 import VueConfetti from "vue-confetti";
@@ -58,8 +62,8 @@ Vue.use(VueConfetti);
 
 export default {
   name: "primaire_calcul",
-  components: { niveauCard, FormWizard, TabContent, ValidationHelper },
-  mixins: [ValidationHelper],
+  components: { niveauCard },
+
   data() {
     return {
       select: 0,
@@ -88,10 +92,12 @@ export default {
   props: {
     titel: String,
     niveau: Object,
+    show_card: Boolean,
   },
   methods: {
     selectNiveau(index) {
       this.select = index;
+      this.$emit("selection");
     },
     calculate(module) {
       let count = 0;
@@ -115,7 +121,7 @@ export default {
           sum += val.note;
         }
       });
-      this.moyenne = sum / count;
+      this.moyenne = (sum / count).toFixed(2);
     },
     Onsubmit() {
       this.select = 0;
@@ -126,6 +132,7 @@ export default {
     },
     initiale() {
       this.congrats = 0;
+      this.$emit("selection");
       this.$confetti.stop();
     },
   },
@@ -134,26 +141,17 @@ export default {
 </script>
 
 <style scoped>
-label {
-  font-weight: 600;
-}
 .show {
-  position: absolute;
-  top: 120%;
-  left: 50%;
-  width: 50%;
-  z-index: 1;
-  background: #fff;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1),
-    0 0 0 1000px rgba(255, 255, 255, 0.95);
-  padding: 40px;
+  position: relative;
+  left: 100%;
 }
-input {
-  border: none;
-  border-bottom: 1px solid #000;
-  outline: none;
+@media screen and (max-width: 766px) {
+  .show {
+    position: relative;
+    left: 5px;
+  }
 }
+
 .felicitation {
   top: 50%;
   position: fixed;

@@ -1,12 +1,11 @@
 <template>
-  <div class="college">
+  <div class="secondaire">
     <card
       v-if="show_card"
       :titel="titel"
       :niveau="niveau"
       @selectNiveau="selectNiveau"
     ></card>
-
     <div class="show mt-5" v-if="select">
       <h2 class="text-center mb-3">{{ this.niveau[select].name }}</h2>
       <div class="row">
@@ -61,7 +60,7 @@ import VueConfetti from "vue-confetti";
 
 Vue.use(VueConfetti);
 export default {
-  name: "college_calcul",
+  name: "secondaire_calcul",
   props: {
     niveau: Object,
     titel: String,
@@ -141,6 +140,17 @@ export default {
 </script>
 
 <style scoped>
+.show {
+  position: relative;
+  right: 100%;
+}
+@media screen and (max-width: 766px) {
+  .show {
+    position: relative;
+    right: 1px;
+  }
+}
+
 .felicitation {
   top: 50%;
   position: fixed;
